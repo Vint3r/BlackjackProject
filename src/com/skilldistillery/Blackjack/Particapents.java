@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.skilldistillery.cards.Card;
+import com.skilldistillery.cards.Rank;
 
 public abstract class Particapents {
 	List<Card> hand;
@@ -54,13 +55,18 @@ public abstract class Particapents {
 		hand.add(card);
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public boolean isBust(List<Card> hand) {
 		boolean bust = false;
 		int handValue = 0;
 		for (Card card : hand) {
 			handValue += card.getValue();
 		}
-		if (handValue > 21) {
+		if (handValue > 21 && hand.contains(Rank.ACE)) {
+			handValue -= 10;
+			return bust;
+		}
+		else if (handValue > 21) {
 			bust = true;
 			return bust;
 		}
@@ -69,10 +75,14 @@ public abstract class Particapents {
 	
 	public abstract void displayHands(List<Card> hand);
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public int getHandValue() {
 		int handValue = 0;
 		for (Card card : hand) {
 			handValue += card.getValue();
+			if (handValue > 21 && hand.contains(Rank.ACE)) {
+				handValue -= 10;
+			}
 		}
 		return handValue;
 	}
