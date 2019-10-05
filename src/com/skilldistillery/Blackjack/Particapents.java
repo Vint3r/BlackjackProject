@@ -68,9 +68,12 @@ public abstract class Particapents {
 	}
 	
 	public abstract void displayHands(List<Card> hand);
-
-	public void displayHands() {
-		// TODO Auto-generated method stub
-		
+	
+	public int getHandValue() {
+		int handValue = 0;
+		for (Card card : hand) {
+			handValue += card.getValue();
+		}
+		return handValue;
 	}
 }

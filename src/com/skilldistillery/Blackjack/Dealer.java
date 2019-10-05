@@ -37,7 +37,6 @@ public class Dealer extends Particapents {
 		return userCards;
 	}
 
-	@Override
 	public void displayHands() {
 		System.out.println("The dealer has a card face down and a " + hand.get(1) + " face up for a total of "
 				+ hand.get(1).getValue());
@@ -76,10 +75,13 @@ public class Dealer extends Particapents {
 				System.out.println("Dealer draws a " + hand.get(counter) + " bringing his hand value to: " + handValue);
 				if (isBust(hand)) {
 					System.out.println("Dealer busts.");
+					bust = true;
 				}
 			} else if (handValue >= mustStay) {
+				if (handValue <= 21) {
 				System.out.println("Dealer stands with a finishing hand total of " + handValue);
 				bust = true;
+				}
 			}
 		}
 	}

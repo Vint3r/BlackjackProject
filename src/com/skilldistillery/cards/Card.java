@@ -31,8 +31,6 @@ public class Card {
 		Card other = (Card) obj;
 		if (rank != other.rank)
 			return false;
-		if (suit != other.suit)
-			return false;
 		return true;
 	}
 

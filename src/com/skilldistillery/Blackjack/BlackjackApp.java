@@ -1,6 +1,11 @@
 package com.skilldistillery.Blackjack;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+
+import com.skilldistillery.cards.Card;
 
 public class BlackjackApp {
 	Dealer dealer = new Dealer("Dealer");
@@ -57,33 +62,42 @@ public class BlackjackApp {
 	private void game(BlackjackApp app) {
 		boolean turnOver = false;
 		String userIn = "";
+		boolean canSplit = player.handCanSplit();
 		do {
 			turnOver = player.isBust(player.getHand());
-			if(turnOver) {
+			if (canSplit) {
 				System.out.println("You bust, sorry 'bout that.");
 				userIn = "2";
-			}
-			else {
-			System.out.println();
-			System.out.println("What would you like to do?");
-			System.out.println("1.) Hit");
-			System.out.println("2.) Stay");
-			userIn = input.nextLine();
+			} else {
+				System.out.println();
+				System.out.println("What would you like to do?");
+				System.out.println("Hit");
+				if (player.handCanSplit()) {
+					System.out.println("Split");
+					System.out.println("Stay");
+				}
+				else {
+					System.out.println("Stay");
+				}
+				userIn = input.nextLine();
 			}
 			switch (userIn.toLowerCase()) {
 			case "hit":
-			case "one":
-			case "1":
 			case "hit me":
 				player.addCard(dealer.hitPlayer());
 				player.displayHands(player.getHand());
 				break;
 			case "stay":
-			case "2":
-			case "two":
+			case "done":
+			case "na":
 				dealer.dealerTurn();
 				app.finalCompare();
 				turnOver = true;
+				break;
+			case "split":
+			case "divide":
+			case "split me":
+				app.splitMenu(app);
 				break;
 			default:
 				System.err.println("THAT IS A INVALID SELECTION");
@@ -91,10 +105,68 @@ public class BlackjackApp {
 		} while (turnOver == false);
 	}
 
-	private void finalCompare() {
-		if (player.isBust(player.getHand()) && dealer.isBust(dealer.getHand())) {
-			System.out.println("EVERYONE SUCKS WHY YOU DO THIS!");
+	private void splitMenu(BlackjackApp app) {
+		boolean turnOver = false;
+		String userIn = "";
+		Map<Integer, List<Card>> splitHand = player.splitHand();
+		Set<Integer> keys = splitHand.keySet();	
+		for (Integer key : keys) {
+			if (key == 1) {
+				player.displayHands(splitHand.get(key));
+			} 
+			else {
+				System.out.println();
+				player.displayHands(splitHand.get(key));
+			}
+		}
+		for (Integer key : keys) {
+			List<Card> currentHand = splitHand.get(key);
+			System.out.println("Hand is split, what would you like to do?");
+			System.out.println("Hit");
+			System.out.println("Stay");
+			userIn = input.nextLine();
+			
+			switch (userIn.toLowerCase()) {
+			case "hit":
+			case "hit me":
+				player.addCard(dealer.hitPlayer());
+				player.displayHands(player.getHand());
+				break;
+			case "stay":
+			case "done":
+			case "na":
+				dealer.dealerTurn();
+				app.finalCompare();
+				turnOver = true;
+				break;
+			}
 		}
 	}
 
+	private void finalCompare() {
+		boolean playerBust = player.isBust(player.getHand());
+		boolean dealerBust = dealer.isBust(dealer.getHand());
+		int playerValue = player.getHandValue();
+		int dealerValue = dealer.getHandValue();
+		if (playerBust == true && dealerBust == true) {
+			System.out.println("EVERYONE SUCKS WHY YOU DO THIS!");
+			System.out.println("No one wins, only busts. Busts as far as the eye can see.");
+		} else if (playerBust == false && dealerBust == false) {
+			if (playerValue == dealerValue) {
+				System.out.println("Push game, no one wins no one looses.");
+			} else if (playerValue > dealerValue) {
+				System.out.println("Player wins!! Good game, dealer finished with a hand value of: " + dealerValue
+						+ " and you finished with a hand value of: " + playerValue);
+			} else if (dealerValue > playerValue) {
+				System.out.println("Dealer wins, better luck next time! Dealer finishes with a total of: " + dealerValue
+						+ " and you finished with a hand value of: " + playerValue);
+			}
+		} 
+		else if (dealerBust == true && playerBust == false) {
+			System.out.println("Player wins with a hand value of: " + playerValue + " dealer busts");
+		}
+		else if (dealerBust == false && playerBust == true) {
+			System.out.println("Dealer wins with a hand value of: " + dealerValue + " player busts");
+		}
+	}
 }
