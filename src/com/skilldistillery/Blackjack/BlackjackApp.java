@@ -30,6 +30,7 @@ public class BlackjackApp {
 			case "yes":
 			case "sure":
 			case "yea":
+			case "ya":
 			case "yeah":
 			case "1":
 				app.startGame(app);
