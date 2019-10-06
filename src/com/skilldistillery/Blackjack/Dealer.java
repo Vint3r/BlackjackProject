@@ -70,7 +70,7 @@ public class Dealer extends Particapents {
 		int handValue = hand.get(0).getValue() + hand.get(1).getValue();
 
 		while (bust == false) {
-			if (handValue < mustStay) {
+			if ((handValue < mustStay) || hand.contains(Rank.ACE)) {
 				if (!hand.contains(Rank.ACE)) {
 					counter++;
 					hand.add(deck.dealCard());
