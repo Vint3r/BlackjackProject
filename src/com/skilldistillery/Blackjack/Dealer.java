@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.skilldistillery.cards.Card;
 import com.skilldistillery.cards.Deck;
+import com.skilldistillery.cards.Rank;
 
 public class Dealer extends Particapents {
 	Deck deck;
@@ -59,6 +60,7 @@ public class Dealer extends Particapents {
 		return drawn;
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	public void dealerTurn() {
 		int mustStay = 17;
 		boolean bust = isBust(hand);
@@ -69,18 +71,32 @@ public class Dealer extends Particapents {
 
 		while (bust == false) {
 			if (handValue < mustStay) {
-				counter++;
-				hand.add(deck.dealCard());
-				handValue += hand.get(counter).getValue();
-				System.out.println("Dealer draws a " + hand.get(counter) + " bringing his hand value to: " + handValue);
-				if (isBust(hand)) {
-					System.out.println("Dealer busts.");
-					bust = true;
+				if (!hand.contains(Rank.ACE)) {
+					counter++;
+					hand.add(deck.dealCard());
+					handValue += hand.get(counter).getValue();
+					System.out.println(
+							"Dealer draws a " + hand.get(counter) + " bringing his hand value to: " + handValue);
+					if (isBust(hand)) {
+						System.out.println("Dealer busts.");
+						bust = true;
+					}
+				} else {
+					handValue -= 10;
+					counter++;
+					hand.add(deck.dealCard());
+					handValue += hand.get(counter).getValue();
+					System.out.println(
+							"Dealer draws a " + hand.get(counter) + " bringing his hand value to: " + handValue);
+					if (isBust(hand)) {
+						System.out.println("Dealer busts.");
+						bust = true;
+					}
 				}
 			} else if (handValue >= mustStay) {
 				if (handValue <= 21) {
-				System.out.println("Dealer stands with a finishing hand total of " + handValue);
-				bust = true;
+					System.out.println("Dealer stands with a finishing hand total of " + handValue);
+					bust = true;
 				}
 			}
 		}

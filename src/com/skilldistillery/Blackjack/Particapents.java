@@ -66,7 +66,7 @@ public abstract class Particapents {
 			handValue -= 10;
 			return bust;
 		}
-		else if (handValue > 21) {
+		else if (handValue > 21 && !hand.contains(Rank.ACE)) {
 			bust = true;
 			return bust;
 		}
