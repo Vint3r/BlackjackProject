@@ -8,7 +8,7 @@ import com.skilldistillery.cards.Rank;
 
 public abstract class Particapents {
 	List<Card> hand;
-	String role;
+	protected String role;
 
 	public Particapents() {
 		hand = new ArrayList<>();

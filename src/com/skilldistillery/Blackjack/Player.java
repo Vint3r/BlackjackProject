@@ -11,7 +11,7 @@ import com.skilldistillery.cards.Card;
 public class Player extends Particapents {
 	List<Card> splitHand = new ArrayList<>();
 	Map<Integer, List<Card>> newHand = new TreeMap<>();
-	double cash;
+	private double cash;
 
 	public Player(String role, double cash) {
 		super(role);
