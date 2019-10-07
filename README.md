@@ -1,9 +1,11 @@
 ##Blackjack
 ---
 Fourth weekend project for Skill Distillery, a coding boot camp.
+
 ###Overview
 ---
 This code tries to simulate a Blackjack table for any friendly game of Blackjack. It starts by creating the dealer and along with him, most of whatever else the code will need moving forward. It does this by just calling and creating other classes in his code to create them (such as the deck), or they are created in the main method by the same means. After the hand lists and deck have been created the game simply asks if you would like to play, which it will come back to after every hand. If you say yes it will deal the cards for both the dealer and the player and the game starts. After that a simple game of Blackjack is played.
+
 ###Technologies/Topics used
 ---
 This code is made up of 6 classes and 2 enum classes;
@@ -16,6 +18,7 @@ This code is made up of 6 classes and 2 enum classes;
 * Finally, a application class to provide a interface for the actual player to use for using the program.
 
 The program starts by saying hello then hoping into a launch method where it finishes setting up what it needs to and asking if the user would like to play a round. If the user types yes it moves on to actually playing the game, if they say no the program ends there. After the round starts it has a new method it calls to print the menu system and deals the cards to the player and dealer. It checks for a Blackjack for both parties and if not found it moves on through the rest of the app. After the initial dealing of card, the app will check if the player has the option to split.  If the place can it changes how the menu is displayed to reflect that. After that it proceeds much like a real Blackjack game, having the player do his turn until they either choose to stay or busts before the dealer plays. When the player is done the dealer plays until it too either busts or passes its must stand variable of 17 and he stands.
+
 ###Lessons Learned
 ---
 So i started off using a abstract method for the dealer and player class, I knew they were going to have a lot of similar methods so putting them in a abstract class would really help me in more way then one. I find I still have some issues with using them and get a bit turned around so I really wanted to get myself to use at least one to continue to work with them.
