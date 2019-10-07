@@ -17,24 +17,18 @@ public class Deck {
 			}
 		}
 	}
-	
+
 	public int checkDeckSize() {
 		return deck.size();
 	}
-	
+
 	public void shuffle() {
 		Collections.shuffle(deck);
 	}
-	
+
 	public Card dealCard() {
 		Card card = deck.remove(0);
 		return card;
 	}
-//
-//	public void wholeDeck() {
-//		for (Card card : deck) {
-//			System.out.println(card);
-//		}
-//	}
 
 }

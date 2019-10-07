@@ -47,14 +47,14 @@ public abstract class Particapents {
 			System.out.println("Blackjack!!" + role + " wins!!");
 			isBlackjack = true;
 		}
-		
+
 		return isBlackjack;
 	}
-	
+
 	public void addCard(Card card) {
 		hand.add(card);
 	}
-	
+
 	@SuppressWarnings("unlikely-arg-type")
 	public boolean isBust(List<Card> hand) {
 		boolean bust = false;
@@ -65,16 +65,15 @@ public abstract class Particapents {
 		if (handValue > 21 && hand.contains(Rank.ACE)) {
 			handValue -= 10;
 			return bust;
-		}
-		else if (handValue > 21 && !hand.contains(Rank.ACE)) {
+		} else if (handValue > 21 && !hand.contains(Rank.ACE)) {
 			bust = true;
 			return bust;
 		}
 		return bust;
 	}
-	
+
 	public abstract void displayHands(List<Card> hand);
-	
+
 	@SuppressWarnings("unlikely-arg-type")
 	public int getHandValue() {
 		int handValue = 0;

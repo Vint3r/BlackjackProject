@@ -53,8 +53,7 @@ public class Player extends Particapents {
 		for (int i = 0; i < hand.size(); i++) {
 			if (i == 0) {
 				continue;
-			}
-			else {
+			} else {
 				otherCanSplit = hand.get(i);
 				if (otherCanSplit.equals(compare)) {
 					return true;
@@ -75,14 +74,13 @@ public class Player extends Particapents {
 				handValue += newHand.get(key).get(i).getValue();
 			}
 			if (key == 2) {
-				System.out.println("You have: " + newHand.get(key) + " in you second "
-						+ "hand, with a value of " + handValue);
-			}
-			else if (key == 1) {
-				System.out.println("You have: " + newHand.get(key) + " in your first "
-						+ "hand, with a value of " + handValue);
+				System.out.println(
+						"You have: " + newHand.get(key) + " in you second " + "hand, with a value of " + handValue);
+			} else if (key == 1) {
+				System.out.println(
+						"You have: " + newHand.get(key) + " in your first " + "hand, with a value of " + handValue);
 			}
 		}
 	}
-	
+
 }
